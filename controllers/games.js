@@ -1,6 +1,6 @@
-import SaveGame from "../models/saveGame.js";
+const SaveGame = require('../models/saveGame.js');
 
-export const getGames = async (req, res) => {
+const getGames = async (req, res) => {
   try{
     const saveGames = await SaveGame.find();
     res.status(200).json(saveGames);
@@ -9,7 +9,7 @@ export const getGames = async (req, res) => {
   }
 }
 
-export const createGame = async (req, res) => {
+const createGame = async (req, res) => {
   const game = req.body;
 
   const newGame = new SaveGame(game);
@@ -20,4 +20,9 @@ export const createGame = async (req, res) => {
   }catch(error){
     res.status(409).json({message: error.message});
   }
+}
+
+module.exports = {
+  getGames,
+  createGame
 }

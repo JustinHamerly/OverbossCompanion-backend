@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const saveGameSchema = mongoose.Schema({
   name: String,
@@ -18,4 +18,4 @@ const saveGameSchema = mongoose.Schema({
 
 const SaveGame = mongoose.model('SaveGame', saveGameSchema);
 
-export default SaveGame;
+module.exports = SaveGame;

@@ -1,26 +1,21 @@
-import express from "express";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
-import cors from 'cors';
+'use strict';
 
-import gameRoutes from './routes/games.js';
+const express = require('express');
+require('dotenv').config();
+const cors = require('cors');
 
+const CONNECTION_URL = process.env.CONNECTION_URL;
+const PORT = process.env.PORT || 5000;
 const app = express();
-
-
-app.use(bodyParser.json({ limit: "30mb", extended: true}));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
+app.use(express.json());
 app.use(cors());
+
+const gameRoutes = require('./routes/games.js');
 
 app.use('/games', gameRoutes);
 
-const CONNECTION_URL = process.env.CONNECTION_URL;
+const mongoose = require('mongoose');
 
-const PORT = process.env.PORT || 5000;
-
-mongoose.connect(CONNECTION_URL, { 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true
-})
+mongoose.connect(CONNECTION_URL)
 .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
 .catch((error) => console.log(error.message));
