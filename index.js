@@ -16,6 +16,7 @@ app.use('/games', gameRoutes);
 
 const mongoose = require('mongoose');
 
+
 mongoose.connect(CONNECTION_URL)
 .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
 .catch((error) => console.log(error.message));

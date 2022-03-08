@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const saveGameSchema = mongoose.Schema({
-  name: String,
-  creator: String,
-  playerCount: Number,
+  owner: String,
+  terrain: [],
+  playercount: Number,
   players: [],
-  tokenPool: [],
-  tokenPoolDiscard: [],
   tilePool: [],
-  tilePoolDiscard: [],
+  tokenPool: [],
+  tileDiscard: [],
+  tokenDiscard: [],
   display: [],
   createdAt: {
     type: Date,
