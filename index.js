@@ -12,7 +12,7 @@ app.use(cors());
 
 const gameRoutes = require('./routes/games.js');
 
-app.use('/games', gameRoutes);
+app.use(gameRoutes);
 
 const mongoose = require('mongoose');
 

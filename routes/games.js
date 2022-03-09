@@ -4,7 +4,7 @@ const { getGames, createGame } =  require('../controllers/games.js');
 
 const router = express.Router();
 
-router.get('/', getGames);
-router.post('/', createGame);
+router.get('/games', getGames);
+router.post('/games', createGame);
 
 module.exports = router;
