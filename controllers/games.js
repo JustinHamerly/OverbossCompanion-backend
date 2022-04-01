@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const SaveGame = require('../models/saveGame.js');
 
 const getGames = async (req, res) => {
@@ -22,7 +23,26 @@ const createGame = async (req, res) => {
   }
 }
 
+const updateGame = async (req, res) => {
+  const { id } = req.params;
+  const game = req.body
+
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(404).send('No post with ID')
+  }
+  try {
+    const updatedGame = await SaveGame.findByIdAndUpdate(id, game);
+    console.log(updatedGame)
+    res.json(updatedGame);
+  } catch (error) {
+    console.log(error.message);
+    res.send(error);
+  }
+
+}
+
 module.exports = {
   getGames,
-  createGame
+  createGame,
+  updateGame
 }
