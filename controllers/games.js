@@ -3,7 +3,7 @@ const SaveGame = require('../models/saveGame.js');
 
 const getGames = async (req, res) => {
   try{
-    const saveGames = await SaveGame.find();
+    const saveGames = await SaveGame.find({});
     res.status(200).json(saveGames);
   }catch(error){
     res.status(404).json({message: error.message});
