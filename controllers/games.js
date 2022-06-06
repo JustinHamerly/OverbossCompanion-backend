@@ -28,21 +28,33 @@ const updateGame = async (req, res) => {
   const game = req.body
 
   if(!mongoose.Types.ObjectId.isValid(id)){
-    return res.status(404).send('No post with ID')
+    return res.status(404).send('No game found')
   }
   try {
     const updatedGame = await SaveGame.findByIdAndUpdate(id, game);
-    console.log(updatedGame)
     res.json(updatedGame);
   } catch (error) {
-    console.log(error.message);
-    res.send(error);
+    res.status(409).json({message: error.message});
   }
 
+}
+
+const deleteGame = async (req, res) => {
+  const { id } = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)){
+    return res.status(409).send('Cannot Delete Resource')
+  }
+  try{
+    await SaveGame.findByIdAndDelete(id);
+    res.status(204).send('successfully deleted game')
+  }catch (error) {
+    res.status(409).json({message: error.message});
+  }
 }
 
 module.exports = {
   getGames,
   createGame,
-  updateGame
+  updateGame, 
+  deleteGame
 }
