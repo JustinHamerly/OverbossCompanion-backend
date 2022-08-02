@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const SaveGame = require('../models/saveGame.js');
 
 const getGames = async (req, res) => {
+  let email = req.query.email
+  let search = {}
+  if (email) search.owner = email
   try{
-    const saveGames = await SaveGame.find({});
+    const saveGames = await SaveGame.find(search);
     res.status(200).json(saveGames);
   }catch(error){
     res.status(404).json({message: error.message});
