@@ -28,7 +28,7 @@ test('fillDisplay adds 4 tiles and tokens to the display', () => {
   newGame.fillDisplay();
   const displayTileLength = newGame.display.tile.length;
   const displayTokenLength = newGame.display.token.length;
-  
+
   expect(displayTileLength).toEqual(4);
   expect(displayTokenLength).toEqual(4);
 });
@@ -49,9 +49,18 @@ test('fillDisplay removes 4 tiles and tokens from the draw pool', () => {
 });
 
 test('adds token and tile to history when picking a pair', () => {
-  
+  const newGame = new Game(testInfo.terrainArr, testInfo.testUser, testInfo.testPlayerArr);
+  newGame.pickPair(1);
+  newGame.pickPair(3);
+  newGame.pickPair(0);
+  expect(newGame.history.length).toEqual(3);
 });
 
-test('does not add tile or token to history when picking a pair', () => {
-
+test('does not add tile or token to history when picking a pair with no idx given', () => {
+  const newGame = new Game(testInfo.terrainArr, testInfo.testUser, testInfo.testPlayerArr);
+  newGame.pickPair(1);
+  newGame.pickPair(3);
+  newGame.pickPair();
+  newGame.pickPair();
+  expect(newGame.history.length).toEqual(2);
 });

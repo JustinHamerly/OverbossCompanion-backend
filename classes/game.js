@@ -136,8 +136,8 @@ Game.prototype.fillDisplay = function(){
   }
 }
 
-Game.prototype.pickPair = function(idx){
-  if(idx>=4) return;
+Game.prototype.pickPair = function(idx = null){
+  if(idx === null || idx>=4) return;
 
   this._moveToHistory(idx)
   this._replaceTileByIdx(idx);
