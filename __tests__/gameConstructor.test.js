@@ -56,6 +56,14 @@ test('adds token and tile to history when picking a pair', () => {
   expect(newGame.history.length).toEqual(3);
 });
 
+test('does not add to history when idx is not a number', () => {
+  const newGame = new Game(testInfo.terrainArr, testInfo.testUser, testInfo.testPlayerArr);
+  newGame.pickPair('hello');
+  newGame.pickPair(false);
+  newGame.pickPair({idx: 3});
+  expect(newGame.history.length).toEqual(0);
+})
+
 test('does not add tile or token to history when picking a pair with no idx given', () => {
   const newGame = new Game(testInfo.terrainArr, testInfo.testUser, testInfo.testPlayerArr);
   newGame.pickPair(1);
