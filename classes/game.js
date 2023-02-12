@@ -1,7 +1,7 @@
 const terrainLibrary = require('../data/terrainTypes')
 
 class Game {
-  constructor(terrainTypesArr, owner, playersArr) {
+  constructor(terrainTypesArr = [], owner, playersArr) {
     this.terrainTypes = this._generateTypeLibrary(terrainTypesArr);
     this.draw = {
       tile: [],
@@ -61,6 +61,8 @@ class Game {
     for (let i = 0; i < 6; i++) {
       this.draw.token.push(new Token('miniboss'));
     }
+
+    this.shuffle();
   }
 
   _replaceTokenByIdx(idx){
@@ -106,20 +108,20 @@ class Game {
 }
 
 Game.prototype.shuffle = function() {
-  let m = this.draw.tile.length, n = this.draw.token.length, t, i;
+  let m = this.draw.tile.length, n = this.draw.token.length, temp, idx;
 
   while (m) {
-    i = Math.floor(Math.random() * m--);
-    t = this.draw.tile[m];
-    this.draw.tile[m] = this.draw.tile[i];
-    this.draw.tile[i] = t;
+    idx = Math.floor(Math.random() * m--);
+    temp = this.draw.tile[m];
+    this.draw.tile[m] = this.draw.tile[idx];
+    this.draw.tile[idx] = temp;
   };
 
   while (n) {
-    i = Math.floor(Math.random() * n--);
-    t = this.draw.token[n];
-    this.draw.token[n] = this.draw.token[i];
-    this.draw.token[i] = t;
+    idx = Math.floor(Math.random() * n--);
+    temp = this.draw.token[n];
+    this.draw.token[n] = this.draw.token[idx];
+    this.draw.token[idx] = temp;
   }
 }
 
@@ -170,4 +172,10 @@ function Tile(tileName, variant = null){
 function Token(tokenName){
   this.tokenName = tokenName;
   this.tokenImg = tokenName;
+}
+
+module.exports = {
+  Token, 
+  Tile, 
+  Game
 }
