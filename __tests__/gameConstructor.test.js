@@ -72,3 +72,21 @@ test('does not add tile or token to history when picking a pair with no idx give
   newGame.pickPair();
   expect(newGame.history.length).toEqual(2);
 });
+
+test('pickPair changes active player to the next player', () => {
+  const newGame = new Game(testInfo.terrainArr, testInfo.testUser, testInfo.testPlayerArr);
+  const firstPlayer = newGame.activePlayer;
+  newGame.pickPair(1);
+  const secondPlayer = newGame.activePlayer;
+  expect(secondPlayer).toEqual(firstPlayer+1);
+})
+
+test('pickPair cycles to the first player when player moved forward at last idx', () => {
+  const newGame = new Game(testInfo.terrainArr, testInfo.testUser, testInfo.testPlayerArr);
+  const playerLength = newGame.players.length;
+  for(let i=0; i<playerLength; i++){
+    newGame.pickPair(0);
+  }
+  const currentPlayer = newGame.activePlayer;
+  expect(currentPlayer).toEqual(0);
+})
