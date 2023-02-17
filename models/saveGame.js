@@ -5,10 +5,14 @@ const saveGameSchema = mongoose.Schema({
   terrain: [],
   playercount: Number,
   players: [],
-  tilePool: [],
-  tokenPool: [],
-  tileDiscard: [],
-  tokenDiscard: [],
+  draw: {
+    tile: [],
+    token: []
+  },
+  discard: {
+    tile: [],
+    token: []
+  },
   display: [],
   createdAt: {
     type: Date,
